@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"> <!-- 声明页面编码为UTF-8，否则很多中文浏览器会默认为GBK，出现乱码 -->
   <title>2048</title>
 
-  <link href="style/main.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+  <link href="style/main.css" rel="stylesheet" type="text/css"> <!-- 2048游戏外观相关的样式都定义在main.css里了，把样式独立在一个文件里一方面结构更清晰，另一方面有利于浏览器缓存，减少二次访问时文件加载量 -->
+  <link rel="shortcut icon" href="favicon.ico"> <!-- favicon是显示在浏览器标签页上的小图标 -->
+  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png"> <!-- 几个apple-touch参数是用于把网页收藏到苹果设备桌面时图标显示用的 -->
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes"> <!-- 声明网页是否可以在Safari浏览器里以全屏模式运行 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="HandheldFriendly" content="True"> <!-- 由于历史原因，不同的浏览器用不同的标记去表示网页是针对手机的 -->
+  <meta name="MobileOptimized" content="320"> <!-- Windows用于表示网页为针对手机显示的标记 -->
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui"> <!-- 现代浏览器用于表示网页是针对手机显示的标记，上面两行声明则可以不用 -->
 </head>
 <body>
   <div class="container">
+    <!-- 显示标题和分数 -->
     <div class="heading">
       <h1 class="title">2048</h1>
       <div class="scores-container">
@@ -26,12 +28,14 @@
       </div>
     </div>
 
+    <!-- 一块显示广告信息和开始游戏按钮的区域 -->
     <div class="above-game">
       <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
       <a class="restart-button">New Game</a>
     </div>
 
-    <div class="game-container">
+    <div class="game-container"> <!-- 游戏区域，我们通常用div标签来划分网页布局 -->
+      <!-- 一块显示游戏信息，和再玩一次链接的区域 -->
       <div class="game-message">
         <p></p>
         <div class="lower">
@@ -40,6 +44,7 @@
         </div>
       </div>
 
+      <!-- 4*4个格子，在现代的网页设计中越来越少用table，而是用div来布局格子。这是因为排版机制问题，渲染table的开销很大，并且table在手机上自适应宽度显示的效果很差。 -->
       <div class="grid-container">
         <div class="grid-row">
           <div class="grid-cell"></div>
@@ -71,8 +76,10 @@
 
       </div>
     </div>
-
+	  
+    <!-- 游戏说明区域 -->
     <p class="game-explanation">
+      <!-- b和strong的视觉效果是类似的，都是字体加粗的效果。但是对于视障人士使用的读屏软件来说，strong标签更为推荐，因为它是逻辑上的强调，而不仅仅是视觉上的加粗。 -->
       <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
     </p>
     <hr>
@@ -85,6 +92,7 @@
     </p>
   </div>
 
+  <!-- 我们一般把JavaScript文件引用放在HTML文件最后，这样可以让HTML页面布局尽快加载出来，让用户看见界面，看不见的逻辑加载可以延迟。由于2048游戏主要逻辑在JavaScript里实现，分成多个文件处理可以让程序逻辑更清晰。 -->
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
   <script src="js/animframe_polyfill.js"></script>
