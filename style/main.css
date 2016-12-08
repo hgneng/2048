@@ -551,6 +551,7 @@ hr {
 .game-explanation {
   margin-top: 50px; }
 
+/* 这里定义屏幕宽度不超过520像素时的样式，也就是针对手机屏幕做另外一套外观，让尺寸更合理 */
 @media screen and (max-width: 520px) {
   html, body {
     font-size: 15px; }
