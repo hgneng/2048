@@ -1,28 +1,39 @@
-@import url(fonts/clear-sans.css);
+@import url(fonts/clear-sans.css); /* 导入另外一个和字体有关的CSS文件，这个多在英文里使用，中文字体文件很大，很难像英文一样搞花哨的字体 */
 html, body {
-  margin: 0;
+  margin: 0; /* 让屏幕4边不留空白，部分浏览器默认样式是会留一点空白的。这个在手机上才能体验到，在PC上，游戏内容本身不是使用100%宽度的。 */
   padding: 0;
-  background: #faf8ef;
-  color: #776e65;
+  background: #faf8ef; /* 页面的背景色 */
+  color: #776e65; /* 默认字体颜色 */
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px; }
+  font-size: 18px; } /* 字体尺寸一般最小为12px, 默认尺寸为16px */
 
 body {
-  margin: 80px 0; }
+  margin: 80px 0; } /* 屏幕上下留80像素空间，左右不留空白。这里覆盖了第3行对body margin:0的定义。 */
 
+/* 这是一种让内容另起一行的技巧，主要是要兼容各种旧浏览器的版本。在CSS中，这一类奇奇怪怪的做法很多。 */
 .heading:after {
   content: "";
   display: block;
-  clear: both; }
+  clear: both; } /* 消除上面元素float: left和float: right的影响 */
 
 h1.title {
   font-size: 80px;
-  font-weight: bold;
+  font-weight: bold; /* 字体加粗 */
   margin: 0;
   display: block;
   float: left; }
 
-@-webkit-keyframes move-up {
+/* CSS3中的动画 */
+@-webkit-keyframes move-up { /* -webkit-前缀针对webkit内核浏览器的语法，适用的浏览器有Chrome、Safari、360浏览器高速模式、搜狗浏览器极速模式等 */
+  0% { /* 动画中0%时间的一帧状态 */
+    top: 25px; /* 上边距 */
+    opacity: 1; } /* 透明度 */
+  
+  100% {
+    top: -50px;
+    opacity: 0; } } /* 透明度为0就看不见了，所以这里的动画就是上下动一下然后消失 */
+
+@-moz-keyframes move-up { /* -moz-前缀是针对Firefox浏览器写的 */
   0% {
     top: 25px;
     opacity: 1; }
@@ -30,14 +41,9 @@ h1.title {
   100% {
     top: -50px;
     opacity: 0; } }
-@-moz-keyframes move-up {
-  0% {
-    top: 25px;
-    opacity: 1; }
 
-  100% {
-    top: -50px;
-    opacity: 0; } }
+/* 没有前缀的@keyframes是HTML5的标准语法，前面之所以要另外写那么多语法是因为浏览器还在不断发展，HTML5标准还没有定稿。
+   不同浏览器对HTML5的支持程度是不同的。有些特性最初是某一浏览器开始提出的，后来成为标准。这些混乱的语法提现了互联网的发展历史 */
 @keyframes move-up {
   0% {
     top: 25px;
@@ -46,9 +52,10 @@ h1.title {
   100% {
     top: -50px;
     opacity: 0; } }
+
 .scores-container {
-  float: right;
-  text-align: right; }
+  float: right; /* div向右靠 */
+  text-align: right; } /* div内文字向右对齐 */
 
 .score-container, .best-container {
   position: relative;
