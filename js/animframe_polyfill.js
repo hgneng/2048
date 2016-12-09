@@ -1,6 +1,6 @@
 // 这个文件为window对象增加2个方法：requestAnimationFrame和cancelAnimationFrame
-// 前一个方法是注册一个动画回调接口，每隔一帧的时间就调用一下该动画函数
-// 后一个方法是取消注册，让系统不用忙了。这种隔几毫秒就执行一次的动画操作是很消耗CPU的。
+// 前一个方法是注册一个动画回调接口，绘画下一帧的内容
+// 后一个方法是取消动画
 (function () {
   var lastTime = 0;
   var vendors = ['webkit', 'moz'];
