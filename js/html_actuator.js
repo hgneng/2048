@@ -1,22 +1,23 @@
 function HTMLActuator() {
-  this.tileContainer    = document.querySelector(".tile-container");
+  this.tileContainer    = document.querySelector(".tile-container"); // 获取class为tile-container的元素
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
 
-  this.score = 0;
+  this.score = 0; // 初始化分数为0
 }
 
 HTMLActuator.prototype.actuate = function (grid, metadata) {
   var self = this;
 
+  // 动画处理函数，定义下一帧内容
   window.requestAnimationFrame(function () {
     self.clearContainer(self.tileContainer);
 
     grid.cells.forEach(function (column) {
       column.forEach(function (cell) {
         if (cell) {
-          self.addTile(cell);
+          self.addTile(cell); // 这里会为每一个格子都派生出下一帧动画
         }
       });
     });
@@ -67,6 +68,8 @@ HTMLActuator.prototype.addTile = function (tile) {
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
     window.requestAnimationFrame(function () {
+      // 这里产生每一个格子的动画，原理只是增加一个class，class的名称有位置的标记
+      // 不同位置标记的class有不同的CSS3动画定义
       classes[2] = self.positionClass({ x: tile.x, y: tile.y });
       self.applyClasses(wrapper, classes); // Update the position
     });
@@ -112,6 +115,7 @@ HTMLActuator.prototype.updateScore = function (score) {
   this.scoreContainer.textContent = this.score;
 
   if (difference > 0) {
+    // 增加一个显示加分的DIV，这个加分有个动画，是通过CSS实现的，可以查找main.css里的score-addition关键字
     var addition = document.createElement("div");
     addition.classList.add("score-addition");
     addition.textContent = "+" + difference;
