@@ -1,8 +1,11 @@
+// 这个文件是JavaScript面向对象的书写风格
+// 首先定义一个Grid类，有size和previousState属性，当size为4时，就是4*4的格子集合了
 function Grid(size, previousState) {
   this.size = size;
   this.cells = previousState ? this.fromState(previousState) : this.empty();
 }
 
+// 给Grid类定义一个empty方法，清空格子的内容
 // Build a grid of the specified size
 Grid.prototype.empty = function () {
   var cells = [];
@@ -33,6 +36,7 @@ Grid.prototype.fromState = function (state) {
   return cells;
 };
 
+// 在16个格子中随机寻找一个空的格子
 // Find the first available random position
 Grid.prototype.randomAvailableCell = function () {
   var cells = this.availableCells();
@@ -99,6 +103,7 @@ Grid.prototype.withinBounds = function (position) {
          position.y >= 0 && position.y < this.size;
 };
 
+// 对象序列化，把Grid对象的内容变成数组输出
 Grid.prototype.serialize = function () {
   var cellState = [];
 
