@@ -1,3 +1,4 @@
+// 游戏的控制器，用于把各游戏的部分组织起来
 function GameManager(size, InputManager, Actuator, StorageManager) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
@@ -58,6 +59,7 @@ GameManager.prototype.setup = function () {
   this.actuate();
 };
 
+// 随机增加最初的数字
 // Set up the initial tiles to start the game with
 GameManager.prototype.addStartTiles = function () {
   for (var i = 0; i < this.startTiles; i++) {
@@ -65,9 +67,11 @@ GameManager.prototype.addStartTiles = function () {
   }
 };
 
+// 在随机位置增加随机的数字
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
+    // Math.random()返回一个0-1的。因此，随机的数字有90%的几率是出现2，10%的几率出现4.
     var value = Math.random() < 0.9 ? 2 : 4;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
@@ -167,6 +171,7 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
+          // 当发现出现2048时就结束游戏
           if (merged.value === 2048) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
