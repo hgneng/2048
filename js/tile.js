@@ -1,3 +1,4 @@
+// Tile的中文翻译是地砖，表示16个格子里面的一个格子
 function Tile(position, value) {
   this.x                = position.x;
   this.y                = position.y;
